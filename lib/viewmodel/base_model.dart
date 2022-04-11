@@ -2,7 +2,7 @@ import 'package:cv_task/constant/enums/view_state.dart';
 import 'package:flutter/foundation.dart';
 
 class BaseModel extends ChangeNotifier {
-  ViewState _state = ViewState.Idle;
+  ViewState _state = ViewState.idle;
   String _errorMessage = "";
 
   String get errorMessage => _errorMessage;
