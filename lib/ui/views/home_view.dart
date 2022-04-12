@@ -1,9 +1,12 @@
 import 'package:cv_task/constant/enums/view_state.dart';
+import 'package:cv_task/ui/builders/highlight_builder.dart';
 import 'package:cv_task/ui/components/text_input.dart';
+import 'package:cv_task/ui/syntaxes/highlight_syntax.dart';
 import 'package:cv_task/ui/views/base_view.dart';
 import 'package:cv_task/viewmodel/home_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:markdown/markdown.dart' as md;
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -12,7 +15,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseView<HomeModel>(
       onModelReady: (model) {
-        model.onModelReady();
+        model.onModelReady(MediaQuery.of(context).padding.bottom);
       },
       builder: (context, model, child) {
         return SafeArea(
@@ -22,8 +25,7 @@ class HomeView extends StatelessWidget {
                 ? AppBar(
                     leading: IconButton(
                       onPressed: () {
-                        model.showSearchBar = false;
-                        model.searchText = '';
+                        model.reset();
                       },
                       icon: const Icon(
                         Icons.arrow_back,
@@ -34,6 +36,7 @@ class HomeView extends StatelessWidget {
                     title: TextInput(
                       onChanged: (value) {
                         model.searchText = value;
+                        model.controller.scrollToIndex(0);
                       },
                       action: TextInputAction.search,
                       border: InputBorder.none,
@@ -42,16 +45,6 @@ class HomeView extends StatelessWidget {
                       ),
                       hint: 'Search...',
                     ),
-                    actions: const [
-                      Icon(
-                        Icons.chevron_left,
-                        color: Colors.black,
-                      ),
-                      Icon(
-                        Icons.chevron_right,
-                        color: Colors.black,
-                      ),
-                    ],
                     backgroundColor: Colors.white,
                   )
                 : AppBar(
@@ -66,7 +59,42 @@ class HomeView extends StatelessWidget {
                     ],
                   ),
             body: model.state == ViewState.idle
-                ? Markdown(data: model.content)
+                ? SingleChildScrollView(
+                    controller: model.controller,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 8,
+                      ),
+                      child: Column(
+                        children: [
+                          MarkdownBody(
+                            key: UniqueKey(),
+                            data: model.content,
+                            builders: {
+                              'highlight': HighlightBuilder(
+                                controller: model.controller,
+                                occurenceCountCb: (count) {},
+                                selectable: false,
+                              ),
+                            },
+                            extensionSet: md.ExtensionSet(
+                              [
+                                ...md.ExtensionSet.gitHubFlavored.blockSyntaxes,
+                              ],
+                              [
+                                if (model.searchText.isNotEmpty)
+                                  HighlightSyntax(model.searchText),
+                                md.EmojiSyntax(),
+                                ...md
+                                    .ExtensionSet.gitHubFlavored.inlineSyntaxes,
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  )
                 : const Center(
                     child: CircularProgressIndicator(),
                   ),

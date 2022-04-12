@@ -50,6 +50,12 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
 
+dependency_overrides: 
+  flutter_markdown:
+    git:
+      url: https://github.com/CircuitVerse/packages.git
+      path: packages/flutter_markdown
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
