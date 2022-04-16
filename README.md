@@ -1,16 +1,31 @@
-# cv_task
+# CircuitVerse GSOC'22 Task
 
-A new Flutter project.
+These tasks are to help in understanding the project scope.
 
-## Getting Started
+### Tasks Details
 
-This project is a starting point for a Flutter application.
+- Prepare and design unit test cases for Interactive Book
 
-A few resources to get you started if this is your first Flutter project:
+- Proof of concept for Implementing Search feature (on mobile app side)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- Translate Dialogue Services (../services/dialog_service.dart)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### POC for Implementing Search in Interactive Book
+
+*Code Link*: This Repo
+
+*Demo*
+
+https://user-images.githubusercontent.com/77198905/163672062-8645e496-a50b-4e76-a3c3-732f71f90243.mp4
+
+
+### POC for Implementing Search in Featured Circuits
+
+*Code Link*: [Repo](https://github.com/aman-singh7/mobile-app/tree/search_circuit)
+
+*Demo*
+
+
+https://user-images.githubusercontent.com/77198905/163672233-3a1ed8ee-93f1-42c4-9fb4-4b3dcf38fb23.mp4
+
+
