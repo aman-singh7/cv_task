@@ -28,4 +28,8 @@ https://user-images.githubusercontent.com/77198905/163672062-8645e496-a50b-4e76-
 
 https://user-images.githubusercontent.com/77198905/163672233-3a1ed8ee-93f1-42c4-9fb4-4b3dcf38fb23.mp4
 
+### Translate Dialogue Service
+
+*Code Link*: [Repo](https://github.com/aman-singh7/mobile-app/tree/internationalizing)
+
 
